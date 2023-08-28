@@ -13,7 +13,6 @@
 	gnome.gnome-tweaks
 	gnome.iagno
 	gnome.gnome-boxes
-	gpick
 	pika-backup
 	gnome.gnome-power-manager
 	bleachbit
@@ -26,12 +25,26 @@
 	gimp
 	#freetube -> freetube doesn't work with nix; I installed it via flatpak...
 	newsflash
+	wl-color-picker
 	vlc
 	spotify
 	mullvad-vpn
 	qbittorrent
 	tor-browser-bundle-bin
 	gh
+	# Prog
+	nodejs_18
+	
+	go
+	gopls
+	delve
+	go-tools
+	
+	rustup
+	gcc
+	#gtk
+	graphite-gtk-theme # theme
+	tela-icon-theme # icon theme
 	# fish plugins
 	fishPlugins.autopair
 	fishPlugins.puffer
@@ -41,14 +54,15 @@
 	# gnome extensions
 	gnomeExtensions.pano
 	gnomeExtensions.caffeine
-	gnomeExtensions.desktop-icons-ng-ding
-	gnomeExtensions.emoji-selector
+	#gnomeExtensions.desktop-icons-ng-ding, don't work
+	#gnomeExtensions.emoji-selector, not compatible
 	gnomeExtensions.openweather
 	gnomeExtensions.search-light
 	gnomeExtensions.top-bar-organizer
 	gnomeExtensions.hide-activities-button
 	gnomeExtensions.vitals
 	gnomeExtensions.appindicator
+	#gnomeExtensions.color-picker, don't work
     ];
   };
   
@@ -114,10 +128,22 @@
 		};	
  	};
  	
-	home.sessionVariables = {
-		EDITOR = "codium";
-		#BROWSER = "brave";
-		TERMINAL = "kitty";
+	# gtk theme
+	gtk = {
+		enable = true;
+		font = {
+			name = "JetBrains Mono Regular";
+			size = 10;
+			package = pkgs.jetbrains-mono;
+		};
+		theme = {
+			name = "Graphite-Dark";
+			package = pkgs.graphite-gtk-theme;
+		};
+		iconTheme = {
+			name = "Tela-black";
+			package = pkgs.tela-icon-theme;
+		};
 	};
  	
 	# Prog
@@ -130,6 +156,178 @@
 			user.signingkey = "E74C820E1FDAF6EA";
 			commit.gpgsign = true;
 	      	};
+	};
+	
+	# enable vscodium + config
+	programs.vscode = {
+		enable = true;
+		package = pkgs.vscodium;
+		#mutableExtensionsDir = false;
+		userSettings = {
+			  # Design
+			  "editor.bracketPairColorization.enabled" = true;
+			  "editor.guides.bracketPairs" = "active";
+			  "breadcrumbs.enabled" = true;
+			  "debug.toolBarLocation" = "floating";
+			  "editor.autoIndent" = "full";
+			  "editor.cursorStyle" = "line";
+			  # Font/Style
+			  "editor.fontSize" = 17;
+			  "editor.fontWeight" = "500";
+			  "editor.letterSpacing" = 0;
+			  "editor.lineHeight" = 23;
+			  "editor.fontFamily" = "'JetBrains Mono'; Consolas";
+			  "editor.fontLigatures" = true;
+		 	  "workbench.colorTheme" = "Rosé Pine";
+			  # Windows
+			  "files.autoSave" = "afterDelay";
+			  "files.autoSaveDelay" = 5000;
+			  "search.showLineNumbers" = true;
+			  "workbench.iconTheme" = "material-icon-theme";
+			  "zenMode.centerLayout" = false;
+			  # "window.title" = "${dirty}👨‍💻 ${rootName}${separator}${activeEditorShort}";
+			  "editor.tabSize" = 2;
+			  "explorer.confirmDelete" = false;
+			  "workbench.activityBar.visible" = true;
+			  "workbench.statusBar.visible" = true;
+			  "workbench.sideBar.location" = "left";
+			  "workbench.editor.wrapTabs" = true;
+			  "editor.wordWrap" = "on";
+			  "extensions.ignoreRecommendations" = true;
+			  "editor.wordWrapColumn" = 120;
+			  "editor.suggestSelection" = "first";
+			  "files.exclude" = {
+			    "**/.classpath" = true;
+			    "**/.project" = true;
+			    "**/.settings" = true;
+			    "**/.factorypath" = true;
+			  };
+			  "editor.minimap.maxColumn" = 200;
+			  "editor.minimap.scale" = 3;
+			  "editor.minimap.renderCharacters" = false;
+			  "editor.minimap.enabled" = false;
+			  "typescript.updateImportsOnFileMove.enabled" = "always";
+			  "javascript.updateImportsOnFileMove.enabled" = "always";
+			  # Formatter
+			  "editor.defaultFormatter" = "esbenp.prettier-vscode";
+			  "editor.formatOnSave" = true;
+			  "editor.formatOnPaste" = true;
+			  "[javascript]" = {
+			    "editor.defaultFormatter" = "esbenp.prettier-vscode";
+			  };
+			  "[typescript]" = {
+			    "editor.defaultFormatter" = "esbenp.prettier-vscode";
+			  };
+			  "[svelte]" = {
+			    "editor.defaultFormatter" = "svelte.svelte-vscode";
+			  };
+			  "[html]" = {
+			    "editor.defaultFormatter" = "esbenp.prettier-vscode";
+			  };
+			  "[python]" = {
+			    "editor.defaultFormatter" = null;
+			    "editor.formatOnPaste" = false;
+			  };
+			  "[prisma]" = {
+			    "editor.defaultFormatter" = "Prisma.prisma";
+			  };
+			  "[go]" = {
+			    "editor.defaultFormatter" = "golang.go";
+			  };
+			  "[rust]" = {
+			    "editor.defaultFormatter" = "rust-lang.rust-analyzer";
+			  };
+			  "python.formatting.blackArgs" = ["--line-length" "120"];
+			  "python.formatting.provider" = "black";
+			  # Svelte
+			  "svelte.enable-ts-plugin" = true;
+			  # Tailwind
+			  "tailwindCSS.experimental.classRegex" = [
+			    "tw`([^`]*)"
+			    "tw\\.style\\(([^)]*)\\)"
+			  ];
+			  # Ternimal
+			  "terminal.integrated.defaultProfile.linux" = "fish";
+			  "terminal.integrated.shellIntegration.enabled" = true;
+			  "terminal.integrated.fontFamily" = "'JetBrains Mono'";
+			  # Others
+			  "emmet.includeLanguages" = {
+			    "javascript" = "javascriptreact";
+			  };
+			  "git.enableSmartCommit" = true;
+			  "git.autofetch" = true;
+			  "github.gitAuthentication" = false;
+			  "editor.linkedEditing" = true;
+			  "explorer.confirmDragAndDrop" = false;
+			  "git.confirmSync" = false;
+			  "git.enableCommitSigning" = true;
+			  "liveServer.settings.donotShowInfoMsg" = true;
+			  "security.workspace.trust.untrustedFiles" = "open";
+			  "prettier.enableDebugLogs" = true;
+			  "editor.inlineSuggest.enabled" = true;
+			  "editor.cursorBlinking" = "phase";
+			  "editor.cursorSmoothCaretAnimation" = "on";
+			  "vsicons.dontShowNewVersionMessage" = true;
+			  "editor.unicodeHighlight.invisibleCharacters" = false;
+			  "http.systemCertificates" = false;
+			  "workbench.colorCustomizations" = {};
+			  "thunder-client.codeSnippetLanguage" = "curl";
+			  "go.toolsManagement.autoUpdate" = true;
+			  "[astro]" = {
+			    "editor.defaultFormatter" = "astro-build.astro-vscode";
+			  };
+			  "thunder-client.htmlView" = "Raw Html";
+			  "editor.unicodeHighlight.allowedLocales" = {
+			    "fr" = true;
+			  };
+			  "workbench.layoutControl.enabled" = false;
+			  "svelte.plugin.svelte.note-new-transformation" = false;
+			  "git.openRepositoryInParentFolders" = "always";
+			  "errorLens.excludeBySource" = ["rustc(Click for full compiler diagnostic)"];
+			  "rust-analyzer.check.command" = "clippy";
+			  "editor.largeFileOptimizations" = false;
+			  "window.zoomLevel" = 1;
+			  "[c]" = {
+			    "editor.defaultFormatter" = "ms-vscode.cpptools";
+			  };
+		};
+		extensions = with pkgs.vscode-extensions; [
+			# Langages
+			rust-lang.rust-analyzer
+			golang.go
+			yzhang.markdown-all-in-one
+			bungcip.better-toml
+			bradlc.vscode-tailwindcss
+			astro-build.astro-vscode
+			prisma.prisma
+			svelte.svelte-vscode
+			# Theme
+			mvllow.rose-pine
+			pkief.material-icon-theme
+			# useful
+			esbenp.prettier-vscode
+			ritwickdey.liveserver
+			dbaeumer.vscode-eslint
+			usernamehw.errorlens
+			mikestead.dotenv
+			serayuzgur.crates
+			adpyke.codesnap
+			wix.vscode-import-cost
+			formulahendry.auto-rename-tag
+			naumovs.color-highlight
+		];
+	};
+	
+	programs.go = {
+		enable = true;
+		goPath = "~/Go";
+	};
+	
+	# default apps
+	home.sessionVariables = {
+		EDITOR = "codium";
+		#BROWSER = "brave";
+		TERMINAL = "kitty";
 	};
  
 	# This value determines the Home Manager release that your
