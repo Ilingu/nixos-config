@@ -320,7 +320,7 @@
 	
 	programs.go = {
 		enable = true;
-		goPath = "~/Go";
+		goPath = "Go";
 	};
 	
 	# default apps
