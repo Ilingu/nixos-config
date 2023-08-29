@@ -57,8 +57,10 @@
 	# gnome extensions
 	gnomeExtensions.pano
 	gnomeExtensions.caffeine
-	gnomeExtensions.desktop-icons-ng-ding
-	gnomeExtensions.desktop-icons-ng-ding # don't work for the moment, see: https://gitlab.com/rastersoft/desktop-icons-ng/-/issues/284
+	
+	gnomeExtensions.desktop-icons-ng-ding # see: https://gitlab.com/rastersoft/desktop-icons-ng/-/issues/284
+	gjs # this is required for "desktop-icons-ng-ding" to work. see: https://gitlab.com/rastersoft/desktop-icons-ng/-/issues/284#note_1533950514
+	
 	#gnomeExtensions.emoji-selector, not compatible
 	gnomeExtensions.openweather
 	gnomeExtensions.search-light

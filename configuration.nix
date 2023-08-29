@@ -110,6 +110,14 @@
 	  #hitori # sudoku game
 	  #atomix # puzzle game
   ]);
+  
+  # this is required for "desktop-icons-ng-ding" to work. see: https://gitlab.com/rastersoft/desktop-icons-ng/-/issues/284#note_1533950514
+  services.xserver.desktopManager.gnome.extraGSettingsOverridePackages = with pkgs; [
+    gnome.nautilus
+    #gnome.mutter # should not be needed
+    #gtk4 # should not be needed
+  ];
+
 
   # Configure keymap in X11
   services.xserver = {
