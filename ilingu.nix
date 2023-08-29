@@ -5,14 +5,13 @@
   users.users.ilingu = {
     isNormalUser = true;
     description = "Ilingu";
-    extraGroups = [ "wheel" "networkmanager" "audio" "video" "docker" ]; # enable sudo, network, medias, docker
+    extraGroups = [ "wheel" "networkmanager" "audio" "video" "docker" "libvirtd" ]; # enable sudo, network, medias, docker, VM
     shell = pkgs.fish; # set default shell to fish
 
     packages = with pkgs; [
 	brave
 	gnome.gnome-tweaks
 	gnome.iagno
-	gnome.gnome-boxes
 	pika-backup
 	gnome.gnome-power-manager
 	bleachbit
@@ -32,6 +31,7 @@
 	qbittorrent
 	tor-browser-bundle-bin
 	gh
+	ffmpeg
 	# Prog
 	nodejs_18
 	
@@ -42,6 +42,9 @@
 	
 	rustup
 	gcc
+	# VMs
+	virt-manager
+	gnome.gnome-boxes
 	#gtk
 	graphite-gtk-theme # theme
 	tela-icon-theme # icon theme
@@ -54,7 +57,8 @@
 	# gnome extensions
 	gnomeExtensions.pano
 	gnomeExtensions.caffeine
-	#gnomeExtensions.desktop-icons-ng-ding, don't work
+	gnomeExtensions.desktop-icons-ng-ding
+	gnomeExtensions.desktop-icons-ng-ding # don't work for the moment, see: https://gitlab.com/rastersoft/desktop-icons-ng/-/issues/284
 	#gnomeExtensions.emoji-selector, not compatible
 	gnomeExtensions.openweather
 	gnomeExtensions.search-light
@@ -76,7 +80,10 @@
 	    	interactiveShellInit = ''
       			set fish_greeting # Disable greeting
     		'';
-		shellInit = ''starship init fish | source'';
+		shellInit = ''
+			starship init fish | source
+			set -x PATH $PATH:$HOME/Prog/CustomScripts
+		'';
 		shellAbbrs = {
 			hatsh = "cd /home/ilingu/Downloads/Software/hat.sh && npm run start";
 			editor = "gnome-text-editor";
@@ -321,6 +328,26 @@
 	programs.go = {
 		enable = true;
 		goPath = "Go";
+	};
+	
+	# VM config
+	dconf.settings = {
+		"org/virt-manager/virt-manager/connections" = {
+		autoconnect = ["qemu:///system"];
+		uris = ["qemu:///system"];
+		};
+	};
+	
+	# Custom Desktop Apps
+	xdg.desktopEntries = {
+		random-folder = {
+			name = "Random Folder";
+			exec = "random-folder";
+			terminal = false;
+			type = "Application";
+			icon = "/home/ilingu/Pictures/Others/Prog/ImgSite/icon-random-folder.png";
+			comment = "Selects a random folder";
+		};
 	};
 	
 	# default apps

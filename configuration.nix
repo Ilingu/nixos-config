@@ -82,8 +82,9 @@
 	dates = "daily";
   };
   
-  # Enable libvirtd virtualisation
-  virtualisation.libvirtd.enable = true;
+  # Enable VM virtualisation
+  virtualisation.libvirtd.enable = true; # gnome boxes
+  programs.dconf.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
