@@ -74,17 +74,24 @@
   };
   
   # Set fonts
-  fonts.fonts = with pkgs; [
-    fira-code
-    nerdfonts
-    jetbrains-mono
-  ];
-  
+  fonts = {
+  	enableDefaultFonts = true; # fix bug where for exemple Japanese characters weren't rendered
+  	fontDir.enable = true; 
+	fonts = with pkgs; [
+		fira-code
+		#(nerdfonts.override { fonts = [ "FiraCode" ]; })
+		jetbrains-mono
+		noto-fonts 
+		ubuntu_font_family
+		unifont
+	];
+  };
+
   # Enable automatic nix cleanup
   nix.settings.auto-optimise-store = true;
   nix.gc = {
   	automatic = true;
-  	dates = "monthly";
+  	dates = "weekly";
   	options = "--delete-older-than 30d"; # deletes all the generations older than 30 days (I assume that if the current generations is stable for more than 30 days, it means it's stable
   };
 
@@ -128,8 +135,6 @@
   # this is required for "desktop-icons-ng-ding" to work. see: https://gitlab.com/rastersoft/desktop-icons-ng/-/issues/284#note_1533950514
   services.xserver.desktopManager.gnome.extraGSettingsOverridePackages = with pkgs; [
     gnome.nautilus
-    #gnome.mutter # should not be needed
-    #gtk4 # should not be needed
   ];
 
 
