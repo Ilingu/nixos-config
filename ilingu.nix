@@ -22,7 +22,7 @@
 	libreoffice
 	audacity
 	gimp
-	#freetube -> freetube doesn't work with nix; I installed it via flatpak...
+	# unstable.freetube # doesn't work, see: https://github.com/FreeTubeApp/FreeTube/issues/3953
 	newsflash
 	wl-color-picker
 	vlc

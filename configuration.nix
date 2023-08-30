@@ -12,14 +12,28 @@
       <home-manager/nixos>
     ];
 
-  # Boot config
-  boot = {
-  	# boot to latest kernel
-  	kernelPackages = pkgs.linuxPackages_latest;
-  
-  	# Default UEFI bootloader
-  	loader.systemd-boot.enable = true;
-	loader.efi.canTouchEfiVariables = true;
+  # boot to latest kernel
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # Boot Grub setup
+  boot.loader = {
+	systemd-boot.enable = false;
+	efi = {
+		canTouchEfiVariables = true;
+		efiSysMountPoint = "/boot";
+	};
+	grub = {
+		enable = true;
+		devices = [ "nodev" ];
+		efiSupport = true;
+		# grub theme to enlighten my day when I boot into a gorgeous boot-loader
+		theme = (pkgs.fetchFromGitHub
+			{
+				owner = "catppuccin";
+				repo = "grub";
+				rev = "803c5df0e83aba61668777bb96d90ab8f6847106";
+				sha256 = "sha256-/bSolCta8GCZ4lP0u5NVqYQ9Y3ZooYCNdTwORNvR7M0=";
+			} + "/src/catppuccin-mocha-grub-theme");
+	};
   };
 
   # Setup keyfile
