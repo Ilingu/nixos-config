@@ -30,7 +30,6 @@
 	mullvad-vpn
 	qbittorrent
 	tor-browser-bundle-bin
-	gh
 	ffmpeg
 	# Prog
 	nodejs_18
@@ -164,8 +163,10 @@
 			init.defaultBranch = "main";
 			user.signingkey = "E74C820E1FDAF6EA";
 			commit.gpgsign = true;
-	      	};
-	};
+			#credential.helper = "${pkgs.git.override { withLibsecret = true; }}/bin/git-credential-libsecret";
+		};
+      	};
+	
 	
 	# enable vscodium + config
 	programs.vscode = {
