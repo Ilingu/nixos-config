@@ -350,6 +350,14 @@
 			icon = "/home/ilingu/Pictures/Others/Prog/ImgSite/icon-random-folder.png";
 			comment = "Selects a random folder";
 		};
+		wl-color-picker = {
+			name = "Color Picker";
+			exec = "wl-color-picker";
+			terminal = false;
+			type = "Application";
+			icon = "/home/ilingu/Pictures/Others/Icon/gpick-icon.png";
+			comment = "Pick a color from your screen";
+		};
 	};
 	
 	# default apps
