@@ -5,7 +5,7 @@
   users.users.ilingu = {
     isNormalUser = true;
     description = "Ilingu";
-    extraGroups = [ "wheel" "networkmanager" "audio" "video" "docker" "libvirtd" ]; # enable sudo, network, medias, docker, VM
+    extraGroups = [ "wheel" "networkmanager" "audio" "video" "docker" "libvirtd" "scanner" "lp" ]; # enable sudo, network, medias, docker, VM, scanning
     shell = pkgs.fish; # set default shell to fish
 
     packages = with pkgs; [
@@ -22,6 +22,7 @@
 	libreoffice
 	audacity
 	gimp
+	signal-desktop
 	# unstable.freetube # doesn't work, see: https://github.com/FreeTubeApp/FreeTube/issues/3953
 	newsflash
 	wl-color-picker
