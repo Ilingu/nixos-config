@@ -34,6 +34,7 @@
 	ffmpeg
 	# Prog
 	nodejs_18
+	bun
 	
 	go
 	gopls
@@ -85,6 +86,7 @@
 		shellInit = ''
 			starship init fish | source
 			set -x PATH $PATH:$HOME/Prog/CustomScripts
+			set -x PATH $PATH:$HOME/.npm-global/bin
 		'';
 		shellAbbrs = {
 			hatsh = "cd /home/ilingu/Downloads/Software/hat.sh && npm run start";

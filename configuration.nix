@@ -242,16 +242,13 @@
  # Overlays
  nixpkgs.overlays = [
  # it doesn't bump to the latest version at all, so for now freetube is installed via flatpak
- #	(self: super: {
- #		freetube = super.freetube.overrideAttrs (old: {
- #			src = super.fetchFromGitHub {
- #				owner = "FreeTubeApp";
- #				repo = "FreeTube";
- #				rev = "a8658a745dbd800494241bd5fcb6616b98aa3e21";
- #				#url = "https://github.com/FreeTubeApp/FreeTube/releases/download/v0.19.0-beta/freetube_0.19.0_amd64.AppImage";
- #				sha256 = "sha256-+pDXG4sLTpS9dfVDGTNI/3LMq4PXHvbwzTrxYbrlu5g=";
- #			};
- #		});
- #	})
+ 	(self: super: {
+ 		bun = super.bun.overrideAttrs (old: {
+ 			src = super.fetchurl {
+ 				url = "https://github.com/oven-sh/bun/releases/download/bun-v1.0.0/bun-linux-x64-baseline.zip";
+			        hash = "sha256-wKGXtrn+gr5nu2P1WQ18e9x3kIzX7rWEOJu1qxpr2zc=";
+ 			};
+ 		});
+ 	})
  ];
 }
