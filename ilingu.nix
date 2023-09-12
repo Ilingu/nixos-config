@@ -98,6 +98,7 @@
 			trash = "/home/ilingu/Prog/BashScript/trash.sh";
 			explorer="nautilus";
 			cls = "clear";
+			gcp = "gcp.sh";
 			#rm = "trash";
 		};
 		plugins = [
@@ -314,6 +315,7 @@
 			astro-build.astro-vscode
 			prisma.prisma
 			svelte.svelte-vscode
+			ms-vscode.cpptools
 			# Theme
 			mvllow.rose-pine
 			pkief.material-icon-theme
