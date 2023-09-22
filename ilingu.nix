@@ -36,6 +36,8 @@
 	nodejs_18
 	bun
 	
+	gnumake
+	
 	go
 	gopls
 	delve
