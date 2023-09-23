@@ -192,6 +192,16 @@
   
   # Enable Flatpak Globally (for apps that doesn't works with nix or that just don't exists)
   services.flatpak.enable = true;
+  
+  # udev config
+  services.udev.packages = [
+    (pkgs.writeTextFile {
+      name = "numworks-calculator";
+      text = ''SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="a291", TAG+="uaccess"
+SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="df11", TAG+="uaccess"'';
+      destination = "/etc/udev/rules.d/50-numworks-calculator.rules";
+    })
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
