@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
-{
+let
+  unstable = import <nixos-unstable> {};
+in {
   # Define a user account.
   users.users.ilingu = {
     isNormalUser = true;
@@ -23,6 +25,9 @@
 	audacity
 	gimp
 	signal-desktop
+	# AI
+	unstable.upscayl
+	unstable.ollama
 	# unstable.freetube # doesn't work, see: https://github.com/FreeTubeApp/FreeTube/issues/3953
 	newsflash
 	wl-color-picker
@@ -318,6 +323,7 @@
 			prisma.prisma
 			svelte.svelte-vscode
 			ms-vscode.cpptools
+			jnoortheen.nix-ide
 			# Theme
 			mvllow.rose-pine
 			pkief.material-icon-theme
