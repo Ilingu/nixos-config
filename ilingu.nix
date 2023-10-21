@@ -25,16 +25,21 @@ in {
 	audacity
 	gimp
 	signal-desktop
+	# discord clients
+	unstable.webcord
 	# AI
 	unstable.upscayl
-	unstable.ollama
+	#unstable.ollama
 	# unstable.freetube # doesn't work, see: https://github.com/FreeTubeApp/FreeTube/issues/3953
 	newsflash
 	wl-color-picker
 	vlc
-	spotify
+	# spotify
+	spot
 	mullvad-vpn
 	qbittorrent
+	gnome-latex
+	texlive.combined.scheme-medium
 	tor-browser-bundle-bin
 	ffmpeg
 	# Prog
