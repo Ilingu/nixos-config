@@ -1,6 +1,13 @@
 { config, pkgs, ... }:
 
 let
+  my-python-packages = ps: with ps; [
+	matplotlib
+	numpy
+  ];
+in
+
+let
   unstable = import <nixos-unstable> {};
 in {
   # Define a user account.
@@ -11,7 +18,7 @@ in {
     shell = pkgs.fish; # set default shell to fish
 
     packages = with pkgs; [
-	brave
+	unstable.brave
 	gnome.gnome-tweaks
 	gnome.iagno
 	pika-backup
@@ -30,7 +37,7 @@ in {
 	unstable.webcord
 	# AI
 	unstable.upscayl
-	unstable.ollama
+	#unstable.ollama
 	# unstable.freetube # doesn't work, see: https://github.com/FreeTubeApp/FreeTube/issues/3953
 	newsflash
 	wl-color-picker
@@ -40,12 +47,16 @@ in {
 	mullvad-vpn
 	qbittorrent
 	gnome-latex
-	texlive.combined.scheme-medium
+	texlive.combined.scheme-full
 	tor-browser-bundle-bin
 	ffmpeg
 	# Prog
 	nodejs_18
 	bun
+	(python3.withPackages my-python-packages)
+	
+	ocaml
+	opam
 	
 	gnumake
 	
@@ -100,6 +111,7 @@ in {
 			starship init fish | source
 			set -x PATH $PATH:$HOME/Prog/CustomScripts
 			set -x PATH $PATH:$HOME/.npm-global/bin
+			source /home/ilingu/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 		'';
 		shellAbbrs = {
 			hatsh = "cd /home/ilingu/Downloads/Software/hat.sh && npm run start";
@@ -206,6 +218,7 @@ in {
 			  "editor.fontFamily" = "'JetBrains Mono'; Consolas";
 			  "editor.fontLigatures" = true;
 		 	  "workbench.colorTheme" = "Rosé Pine";
+		 	  "cSpell.language" = "en,fr";
 			  # Windows
 			  "files.autoSave" = "afterDelay";
 			  "files.autoSaveDelay" = 5000;
@@ -307,6 +320,7 @@ in {
 			  "editor.unicodeHighlight.allowedLocales" = {
 			    "fr" = true;
 			  };
+			  "languageToolLinter.serviceType" = "public";
 			  "workbench.layoutControl.enabled" = false;
 			  "svelte.plugin.svelte.note-new-transformation" = false;
 			  "git.openRepositoryInParentFolders" = "always";
@@ -330,11 +344,13 @@ in {
 			svelte.svelte-vscode
 			ms-vscode.cpptools
 			jnoortheen.nix-ide
+			ocamllabs.ocaml-platform
 			# Theme
 			mvllow.rose-pine
 			pkief.material-icon-theme
 			# useful
 			esbenp.prettier-vscode
+			james-yu.latex-workshop
 			ritwickdey.liveserver
 			dbaeumer.vscode-eslint
 			usernamehw.errorlens

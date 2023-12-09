@@ -75,9 +75,9 @@
   
   # Set fonts
   fonts = {
-  	enableDefaultFonts = true; # fix bug where for exemple Japanese characters weren't rendered
+  	enableDefaultPackages = true; # fix bug where for exemple Japanese characters weren't rendered
   	fontDir.enable = true; 
-	fonts = with pkgs; [
+	packages = with pkgs; [
 		fira-code
 		#(nerdfonts.override { fonts = [ "FiraCode" ]; })
 		jetbrains-mono
