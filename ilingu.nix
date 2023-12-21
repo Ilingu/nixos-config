@@ -20,19 +20,21 @@ in {
     packages = with pkgs; [
 	unstable.brave
 	gnome.gnome-tweaks
-	gnome.iagno
+	#gnome.iagno
 	pika-backup
 	gnome.gnome-power-manager
 	bleachbit
-	via
+	#via
 	veracrypt
-	insomnia
+	#insomnia
 	vscodium
 	libreoffice
 	audacity
 	gimp
-	signal-desktop
+	#signal-desktop
+	geogebra
 	pdfarranger
+	firmware-manager
 	# discord clients
 	unstable.webcord
 	# AI
@@ -43,10 +45,10 @@ in {
 	wl-color-picker
 	vlc
 	# spotify
-	spot
+	# spot -> doesn't work anymore
 	mullvad-vpn
 	qbittorrent
-	gnome-latex
+	# gnome-latex -> useless
 	texlive.combined.scheme-full
 	tor-browser-bundle-bin
 	ffmpeg
@@ -57,6 +59,9 @@ in {
 	
 	ocaml
 	opam
+	ocamlPackages.lsp
+	ocamlPackages.ocamlformat
+	ocamlPackages.utop
 	
 	gnumake
 	
@@ -228,7 +233,6 @@ in {
 			  # "window.title" = "${dirty}👨‍💻 ${rootName}${separator}${activeEditorShort}";
 			  "editor.tabSize" = 2;
 			  "explorer.confirmDelete" = false;
-			  "workbench.activityBar.visible" = true;
 			  "workbench.statusBar.visible" = true;
 			  "workbench.sideBar.location" = "left";
 			  "workbench.editor.wrapTabs" = true;
@@ -324,7 +328,6 @@ in {
 			  "workbench.layoutControl.enabled" = false;
 			  "svelte.plugin.svelte.note-new-transformation" = false;
 			  "git.openRepositoryInParentFolders" = "always";
-			  "errorLens.excludeBySource" = ["rustc(Click for full compiler diagnostic)"];
 			  "rust-analyzer.check.command" = "clippy";
 			  "editor.largeFileOptimizations" = false;
 			  "window.zoomLevel" = 1;
